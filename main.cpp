@@ -29,12 +29,14 @@ int main() {
     char response;
 
     std::cout << "welcome to planet fitness" << std::endl;
-    std::cout << "Here are some options: \nEnter '1': to see all current members information. \nEnter '2': to see average club member age. \nEnter '3': to see average club member activity level. \nEnter '4': to see average club member weight. \nEnter '5': to edit member information."
-                 " \nEnter '6': to exit program.\n" << std::endl;
+    std::cout << "Here are some options: \nEnter '1': to see all current members information. \nEnter '2': to see average club member age. "
+                 "\nEnter '3': to see average club member activity level. \nEnter '4': to see average club member weight. \nEnter '5': to edit member information."
+                 " \nEnter '6': to sort by gender. \nEnter '7': to exit program.\n" << std::endl;
 
     while (!isOnline) {
         int nestedResponseUser = 0;
         int editResponse = 0;
+        int sortGenderResponse = 0;
         float age = 0;
         float actLevel = 0;
         float weight = 0;
@@ -73,31 +75,45 @@ int main() {
                     std::cin >> age;
                     std::cout << std::endl;
                     clubMembers.at(nestedResponseUser).setClubMemberAge(age);
-                    std::cout << "User's new age: " <<clubMembers.at(nestedResponseUser).getClubMemberAge();
+                    std::cout << "User's new age: " << clubMembers.at(nestedResponseUser).getClubMemberAge();
                 }
                 else if (editResponse == 2) {
                     std::cout << "Enter new activity level: " << std::endl;
                     std::cin >> actLevel;
                     std::cout << std::endl;
                     clubMembers.at(nestedResponseUser).setClubMemberActivityLevel(actLevel);
-                    std::cout << "User's new activity level: " <<clubMembers.at(nestedResponseUser).getClubMemberActivityLevel();
+                    std::cout << "User's new activity level: " << clubMembers.at(nestedResponseUser).getClubMemberActivityLevel();
                 }
                 else if (editResponse == 3) {
                     std::cout << "Enter new weight: " << std::endl;
                     std::cin >> weight;
                     std::cout << std::endl;
                     clubMembers.at(nestedResponseUser).setClubMemberWeight(weight);
-                    std::cout << "User's new weight: " <<clubMembers.at(nestedResponseUser).getClubMemberWeight();
+                    std::cout << "User's new weight: " << clubMembers.at(nestedResponseUser).getClubMemberWeight();
                 }
             }
         }
         else if (response == '6') {
+            std::cout << "Would you like to sort from female to male or male to female?" << std::endl;
+            std::cout << "Enter '1': to sort from female - male. \nEnter '2': to sort from male - female.\n" << std::endl;
+            std::cout << "Please enter choice: " << std::endl;
+            std::cin >> sortGenderResponse;
+            if (sortGenderResponse == 1) {
+                sortFemale(clubMembers);
+            }
+            else if (sortGenderResponse == 2) {
+                sortMale(clubMembers);
+            }
+        }
+        else if (response == '7') {
             isOnline = true;
         }
         else {
             isOnline = true;
         }
-        std::cout << "\nEnter '1': to see all current members information. \nEnter '2': to see average club member age. \nEnter '3': to see average club member activity level. \nEnter '4': to see average club member weight. \nEnter '5': to edit member information. \nEnter '6': to exit program.\n " << std::endl;
+        std::cout << "\nEnter '1': to see all current members information. \nEnter '2': to see average club member age. "
+                     "\nEnter '3': to see average club member activity level. \nEnter '4': to see average club member weight. "
+                     "\nEnter '5': to edit member information. \nEnter '6': to sort by gender. \nEnter '7': to exit program.\n " << std::endl;
     }
 
     return 0;
@@ -137,5 +153,4 @@ void sortFemale(std::vector<People>& clubMembers) {
 }
 void sortMale(std::vector<People>& clubMembers) {
     std::sort(clubMembers.begin(),clubMembers.end(), std::greater<People>());
-
 }
